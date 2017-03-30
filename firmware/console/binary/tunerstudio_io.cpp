@@ -63,7 +63,7 @@ BaseChannel * getTsSerialDevice(void) {
 		return (BaseChannel *) TS_SERIAL_UART_DEVICE;
 	}
 #else
-	return (BaseChannel *) TS_SIMULATOR_PORT;
+	return NULL;
 #endif
 }
 

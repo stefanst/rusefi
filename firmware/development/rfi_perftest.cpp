@@ -294,7 +294,7 @@ static void runChibioTest(void) {
 	print("CH_DBG_ENABLE_ASSERTS=%d\r\n", CH_DBG_ENABLE_ASSERTS);
 	print("CH_DBG_ENABLE_STACK_CHECK=%d\r\n", CH_DBG_ENABLE_STACK_CHECK);
 	print("CH_DBG_THREADS_PROFILING=%d\r\n", CH_DBG_THREADS_PROFILING);
-	TestThread(getConsoleChannel());
+	//TestThread(getConsoleChannel());
 }
 
 void initTimePerfActions(Logging *sharedLogger) {

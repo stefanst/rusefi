@@ -51,13 +51,13 @@ static LARGE_INTEGER slice;
  * @brief Low level HAL driver initialization.
  */
 void hal_lld_init(void) {
-  WSADATA wsaData;
+//  WSADATA wsaData;
 
   /* Initialization.*/
-  if (WSAStartup(2, &wsaData) != 0) {
-    printf("Unable to locate a winsock DLL\n");
-    exit(1);
-  }
+//  if (WSAStartup(2, &wsaData) != 0) {
+//    printf("Unable to locate a winsock DLL\n");
+//    exit(1);
+//  }
 
   printf("ChibiOS/RT simulator (Win32)\n");
   if (!QueryPerformanceFrequency(&slice)) {

@@ -9,9 +9,9 @@ PROJECT_DIR = ../firmware
 # Compiler options here.
 ifeq ($(USE_OPT),)
 # this config if debugging is needed, but the binary is about 50M
-# USE_OPT = -c -Wall -O0 -ggdb -g3 -Werror-implicit-function-declaration -Werror -Wno-error=pointer-sign -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers -Wno-error=write-strings
+ USE_OPT = -c -Wall -O0 -ggdb -g3 -Werror-implicit-function-declaration -Werror -Wno-error=pointer-sign -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers -Wno-error=write-strings
 # this config producec a smaller binary file
-  USE_OPT = -c -Wall -O2           -Werror-implicit-function-declaration  -Wno-error=pointer-sign -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers -Wno-error=write-strings -Wno-error=strict-aliasing
+#  USE_OPT = -c -Wall -O2           -Werror-implicit-function-declaration  -Wno-error=pointer-sign -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers -Wno-error=write-strings -Wno-error=strict-aliasing
 
 	ifeq ($(OS),Windows_NT)
 	else
@@ -270,7 +270,7 @@ DLIBDIR =
 
 # List all default libraries here
 ifeq ($(OS),Windows_NT)
-  DLIBS = -static-libgcc -static-libstdc++ -lws2_32
+  DLIBS = -static-libgcc -static-libstdc++
 else
   DLIBS = -static-libgcc -lgcc -static-libstdc++ -m32
 endif
@@ -297,7 +297,7 @@ UINCDIR =
 ULIBDIR =
 
 # List all user libraries here
-ULIBS = -lm
+ULIBS = 
 
 #
 # End of user defines

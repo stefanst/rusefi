@@ -65,7 +65,7 @@ static void termination_handler(eventid_t id) {
 
 	cputs("Init: shell on SD1 terminated");
 	chSysLock();
-	chOQResetI(&SD1.oqueue);
+	chOQResetI(NULL);
 	chSysUnlock();
 
 	// todo: 2nd port for TS
@@ -102,7 +102,7 @@ static void sd1_handler(eventid_t id) {
 		cputs("Init: disconnection on SD1");
 		isSerialOverTcpReady = FALSE;
 		chSysLock();
-		chIQResetI(&SD1.iqueue);
+		chIQResetI(NULL);
 		chSysUnlock();
 	}
 }
@@ -123,7 +123,7 @@ static void sd2_handler(eventid_t id) {
 	if (flags & CHN_DISCONNECTED) {
 		cputs("Init: disconnection on SD2");
 		chSysLock();
-		chIQResetI(&SD2.iqueue);
+		chIQResetI(NULL);
 		chSysUnlock();
 	}
 }
@@ -150,8 +150,8 @@ int main(void) {
 	/*
 	 * Serial ports (simulated) initialization.
 	 */
-	sdStart(&SD1, NULL);
-	sdStart(&SD2, NULL);
+//	sdStart(&SD1, NULL);
+	//sdStart(&SD2, NULL);
 
 	/*
 	 * Console thread started.
@@ -163,9 +163,9 @@ int main(void) {
 	 */
 	cputs("Shell service started on SD1, SD2");
 	cputs("  - Listening for connections on SD1");
-	chEvtRegister(chnGetEventSource(&SD1), &sd1fel, 1);
+//	chEvtRegister(chnGetEventSource(&SD1), &sd1fel, 1);
 	cputs("  - Listening for connections on SD2");
-	chEvtRegister(chnGetEventSource(&SD2), &sd2fel, 2);
+	//chEvtRegister(chnGetEventSource(&SD2), &sd2fel, 2);
 
 	rusEfiFunctionalTest();
 
@@ -181,7 +181,7 @@ int main(void) {
 	/*
 	 * Clean simulator exit.
 	 */
-	chEvtUnregister(chnGetEventSource(&SD1), &sd1fel);
-	chEvtUnregister(chnGetEventSource(&SD2), &sd2fel);
+//	chEvtUnregister(chnGetEventSource(&SD1), &sd1fel);
+	//chEvtUnregister(chnGetEventSource(&SD2), &sd2fel);
 	return 0;
 }

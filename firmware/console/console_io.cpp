@@ -73,17 +73,17 @@ static bool getConsoleLine(BaseSequentialStream *chp, char *line, unsigned size)
 		onDataArrived();
 
 		if (isCommandLineConsoleOverTTL()) {
-			uint32_t flags;
+			//uint32_t flags;
 			chSysLock()
 			;
 
-			flags = chEvtGetAndClearFlagsI(&consoleEventListener);
+		//	flags = chEvtGetAndClearFlagsI(&consoleEventListener);
 			chSysUnlock()
 			;
 
-			if (flags & SD_OVERRUN_ERROR) {
+	//		if (flags & SD_OVERRUN_ERROR) {
 //				firmwareError(OBD_PCM_Processor_Fault, "serial overrun");
-			}
+		//	}
 
 		}
 
@@ -176,7 +176,7 @@ void runConsoleLoop(ts_channel_s *console) {
 #if EFI_PROD_CODE || EFI_EGT || defined(__DOXYGEN__)
 
 
-SerialDriver * getConsoleChannel(void) {
+void getConsoleChannel(void) {
 #if defined(EFI_CONSOLE_UART_DEVICE) || defined(__DOXYGEN__)
 	if (isCommandLineConsoleOverTTL()) {
 		return (SerialDriver *) EFI_CONSOLE_UART_DEVICE;
@@ -186,7 +186,7 @@ SerialDriver * getConsoleChannel(void) {
 #if HAL_USE_SERIAL_USB || defined(__DOXYGEN__)
 	return (SerialDriver *) &SDU1;
 #else
-	return NULL;
+	//return NULL;
 #endif /* HAL_USE_SERIAL_USB */
 }
 
@@ -216,7 +216,7 @@ static THD_FUNCTION(consoleThreadThreadEntryPoint, arg) {
 #endif /* EFI_PROD_CODE */
 
 
-	binaryConsole.channel = (BaseChannel *) getConsoleChannel();
+//	binaryConsole.channel = (BaseChannel *) getConsoleChannel();
 	runConsoleLoop(&binaryConsole);
 
 }
@@ -225,13 +225,13 @@ static THD_FUNCTION(consoleThreadThreadEntryPoint, arg) {
 #define CONSOLE_WRITE_TIMEOUT 10000
 
 void consolePutChar(int x) {
-	chnWriteTimeout(getConsoleChannel(), (const uint8_t *)&x, 1, CONSOLE_WRITE_TIMEOUT);
+//	chnWriteTimeout(getConsoleChannel(), (const uint8_t *)&x, 1, CONSOLE_WRITE_TIMEOUT);
 }
 
 void consoleOutputBuffer(const uint8_t *buf, int size) {
 	lastWriteSize = size;
 #if !EFI_UART_ECHO_TEST_MODE
-	lastWriteActual = chnWriteTimeout(getConsoleChannel(), buf, size, CONSOLE_WRITE_TIMEOUT);
+	//lastWriteActual = chnWriteTimeout(getConsoleChannel(), buf, size, CONSOLE_WRITE_TIMEOUT);
 //	if (r != size)
 //		firmwareError(OBD_PCM_Processor_Fault, "Partial console write");
 #endif /* EFI_UART_ECHO_TEST_MODE */

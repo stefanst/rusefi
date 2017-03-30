@@ -147,7 +147,7 @@ void print(const char *format, ...) {
 	}
 	va_list ap;
 	va_start(ap, format);
-	chvprintf((BaseSequentialStream*) getConsoleChannel(), format, ap);
+	//chvprintf((BaseSequentialStream*) getConsoleChannel(), format, ap);
 	va_end(ap);
 #endif /* EFI_UART_ECHO_TEST_MODE */
 }
